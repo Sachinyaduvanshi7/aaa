@@ -1,18 +1,16 @@
-version: 0.0
-os: linux
-files:
-  - source: /index.html
-    destination: /var/www/html
-hooks:
-  BeforeInstall:
-    - location: scripts/install_dependencies
-      timeout: 300
-      runas: root
-    - location: script/start_server
-      timeout: 300
-      runas: root
-  ApplicationStop:
-    - location: scripts/stop_server
-      timeout: 300
-      runas: root
+version: 0.2
 
+phases:
+  install: 
+    runtime-versions:
+      nodejs: 10
+  build:
+    commands:
+      - echo "Package & Dependicies are getting installed"
+      - npm -f install
+      - echo "Packages have been installed"
+      - echon "Storing Build Artifact to the Location"
+artifacts:
+  type: zip
+  paths:
+    - '*'
